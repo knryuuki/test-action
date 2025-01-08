@@ -1,4 +1,6 @@
 name: Yuuki
 age: 69696969
 location:
-  [ "h0me", "0ffic3", "dr4g0n" ]
+  - "h0me"
+  - "0ffic3"
+  - "dr4g0n"
