@@ -26,13 +26,27 @@ jobs:
       - name: Checkout Actions
         uses: actions/checkout@v4
 
-      - name: Load YAML
+      - name: Read i/o config from config file
+        uses: pietrobolcato/action-read-yaml@1.0.0
         id: config
-        run: |
-          echo "::set-output-name=config::$(jq -r '.' hello.yml)"
+        with:
+          config: ${{ github.workspace }}/hello.yaml
+
+      - name: Read args from config file
+        uses: ehsandanesh/action-read-yaml@env-var-and-filter
+        id: permissions
+        with:
+          config: ${{ github.workspace }}/hello.yaml
+          env-var-prefix: raw_args
+          key-path-pattern: ^locations\.
         
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          args=$(jq -r '.location[] | "-i" + .' hello.yml)
+          args=""
+          for i in 0 1
+            do
+              args+=" -l $raw_args
+          done
+          
           echo "Somecmd $args ${config.name} 
