@@ -33,7 +33,7 @@ jobs:
           config: ${{ github.workspace }}/hello.yaml
 
       - name: Read args from config file
-        uses: ehsandanesh/action-read-yaml@env-var-and-filter
+        uses: pietrobolcato/action-read-yaml@env-var-and-filter
         id: permissions
         with:
           config: ${{ github.workspace }}/hello.yaml
